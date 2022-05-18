@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+//bouncing info back at them
 //query parameters "?,=,&" in url
 router.get('/myname',(req,res) => {
   // console.log(req.query)
@@ -17,7 +18,8 @@ router.get('/myname',(req,res) => {
   res.send(`My name is : ${first} ${last}`)
 })
 
-//get back to user and send from 'server" VIA JSON
+//get back to user and send from 'server" VIA JSON- query from database - PARAMS
+//http://localhost:3000/users/getone/1 --URL
 router.get('/getone/:userNumber', (req,res) => {
   let userNumber = req.params.userNumber
   let foundUser = users[userNumber]
