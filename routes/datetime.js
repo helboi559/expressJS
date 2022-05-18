@@ -4,7 +4,7 @@ let router = express.Router();
 let date = JSON.stringify(Date());
 // console.log(typeof date)
 router.get('/', (req,res,next) => {
-    res.send(date)
+    res.render('datetime',{info: date})
 })
 
 module.exports = router;
