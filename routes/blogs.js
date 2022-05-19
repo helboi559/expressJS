@@ -26,10 +26,10 @@ router.get('/all', function(req, res, next) {
       }
     }
     if(sorted === 'desc') {
-      if(a.createdAt < b.createdAt) {
+      if(a.createdAt > b.createdAt) {
         return -1
       }
-      if(a.createdAt > b.createdAt) {
+      if(a.createdAt < b.createdAt) {
         return 1
       }
     }
@@ -41,19 +41,43 @@ router.get('/all', function(req, res, next) {
 
 //return story by query
 //query parameters "?,=,&" in url
-router.get('/:blogId', function(req, res, next) {
+router.get('/singleBlog/:blogId', function(req, res, next) {
   // res.json(blogs.blogPosts);
   let blogId = req.params.blogId
   
   res.json(findBlog(blogId))
 });
-
 //helper func for query blog
 const findBlog = (blogId) => {
   const foundBlog = blogs.blogPosts.find(ele => ele.id === blogId);
   return foundBlog
 }
+//display where sample input blog of user will start--POST STEP 1
+router.get('/postblog', function(req, res, next) {
+  res.render('postblog')
+});
 
+// console.log(blogs)
+//get data and make into a post
+router.post('/submit', function (req,res,next) {
+   // console.log(JSON.stringify(title))
+  const now = new Date()
+  let newPost = {
+    title:req.body.title,
+    text:req.body.text,
+    author:req.body.author,
+    blogDate:now.toISOString(),
+    id:String(blogs.blogPosts.length + 1)
+  }
+  blogs.blogPosts.push(newPost)
+  console.log("new blogs", blogs.blogPosts)
+  res.send('successful')
+})
+
+//display website
+router.get('/displayBlogs', (req,res,next) => {
+  res.render('displayBlogs')
+})
 
 module.exports = router;
 
