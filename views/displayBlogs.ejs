@@ -7,6 +7,7 @@
         $(document).ready(function () {
             var blogs = [];
             $("#getBlogs").click(function () {
+                $('#blogList').empty();
                 let selected= $('#optionsFilter option:selected').val()
                 // let desc= $('#optionsFilter option[value="Descending"]')
                 console.log(selected)
@@ -28,8 +29,7 @@
     </select>
     <button id="getBlogs">Get Blogs</button>
     <ul id="blogList"></ul>
-    <!-- <a href="http://localhost:4000/blogs/all?sort=asc"> Click to sort by Ascending</a>
-    <a href="http://localhost:4000/blogs/all?sort=desc"> Click to sort by Descending</a> -->
+    
 </body>
 
 </html>

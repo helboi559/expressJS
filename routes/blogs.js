@@ -79,6 +79,17 @@ router.get('/displayBlogs', (req,res,next) => {
   res.render('displayBlogs')
 })
 
+//display single blog
+router.get('/display-single-blog',(req,res,next) => {
+  res.render('display-single-blog')
+  // console.log(req.body)
+})
+
+router.delete('/delete-blog/:blogId', (req,res,next) => {
+  //  let blogId = req.params.blogId
+  //  console.log(req.body)
+   res.send('deleted')
+})
 module.exports = router;
 
 
