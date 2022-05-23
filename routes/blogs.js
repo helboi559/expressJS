@@ -85,11 +85,37 @@ router.get('/display-single-blog',(req,res,next) => {
   // console.log(req.body)
 })
 
+
 router.delete('/delete-blog/:blogId', (req,res,next) => {
-  //  let blogId = req.params.blogId
-  //  console.log(req.body)
-   res.send('deleted')
+  //index id of blogpost
+  const blogIdToDelete = req.params.blogId
+  //call function to return a list w/o the post
+  const filterPosts = generateFilteredBlogs(blogs.blogPosts, blogIdToDelete)
+  //reassign list to new filtered list
+  setBlogposts(filterPosts)
+  
+  setTimeout(() => {
+    res.send('deleted blog')
+  }, 5000)
 })
+//helper function to filter out post by returning list w/o the matching post ID
+const generateFilteredBlogs = (blogList, blogIdDelete) => {
+  const filteredBlogList = [];
+  for(let i = 0 ; i < blogList.length ; i++) {
+    if(blogList[i].id === blogIdDelete) {
+      continue;
+    }
+    filteredBlogList.push(blogList[i])
+  }
+  // console.log(filteredBlogList)
+  return filteredBlogList
+
+}
+
+//
+const setBlogposts = blogList => {
+  blogs.blogPosts = blogList
+}
 module.exports = router;
 
 

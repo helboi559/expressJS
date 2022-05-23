@@ -4,6 +4,24 @@
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
+        jQuery.each(["put", "delete"], function (i, method) {
+                jQuery[method] = function (url, data, callback, type) {
+                    if (jQuery.isFunction(data)) {
+                        type = type || callback;
+                        callback = data;
+                        data = undefined;
+                    }
+
+                    return jQuery.ajax({
+                        url: url,
+                        type: method,
+                        dataType: type,
+                        data: data,
+                        success: callback
+                    });
+                };
+            });
+        
         $(document).ready(function () {
             var title, text, author;
             $("#submit").click(function () {

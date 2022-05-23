@@ -38,6 +38,9 @@
             $("#deleteSingleBlog").click(function () {
                 blogId = $("#blogId").val();
                 // console.log(blogId.val())
+                $.delete('http://localhost:4000/blogs/delete-blog/' + blogId, function(res) {
+                    console.log('response',res)
+                });
                 
             })
         });
